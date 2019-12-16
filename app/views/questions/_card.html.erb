@@ -1,0 +1,53 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    Question #<%= question.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+      <dt>Title</dt>
+      <dd><%= question.title %></dd>
+
+      <dt>Body</dt>
+      <dd><%= question.body %></dd>
+
+      <dt>Enrollment</dt>
+      <dd><%= question.enrollment_id %></dd>
+
+      <dt>Assignment tag</dt>
+      <dd><%= question.assignment_tag %></dd>
+
+      <dt>Anonymous to all</dt>
+      <dd><%= question.anonymous_to_all %></dd>
+
+      <dt>Anonymous to students</dt>
+      <dd><%= question.anonymous_to_students %></dd>
+
+      <dt>Marked good by instructor</dt>
+      <dd><%= question.marked_good_by_instructor %></dd>
+
+    </dl>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to_show_or_back question, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+
+      <div class="col">
+        <%= link_to edit_question_url(question), class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <%= link_to question, method: :delete, data: { confirm: "Do you really want to delete this question?" }, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%= time_ago_in_words(question.updated_at) %> ago
+  </div>
+</div>

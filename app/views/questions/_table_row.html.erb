@@ -1,0 +1,45 @@
+<tr>
+  <td>
+    <%= question.title %>
+  </td>
+
+  <td>
+    <%= question.body %>
+  </td>
+
+  <td>
+    <%= question.enrollment_id %>
+  </td>
+
+  <td>
+    <%= question.assignment_tag %>
+  </td>
+
+  <td>
+    <%= question.anonymous_to_all %>
+  </td>
+
+  <td>
+    <%= question.anonymous_to_students %>
+  </td>
+
+  <td>
+    <%= question.marked_good_by_instructor %>
+  </td>
+
+  <td>
+    <div class="btn-group">
+      <%= link_to question, class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-search-plus fa-fw"></i>
+      <% end %>
+
+      <%= link_to edit_question_url(question), class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-edit fa-fw"></i>
+      <% end %>
+
+      <%= link_to question, method: :delete, data: { confirm: "Do you really want to delete this question?" }, class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-trash-alt fa-fw"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

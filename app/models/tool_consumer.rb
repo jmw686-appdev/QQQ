@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tool_consumers
@@ -18,5 +20,4 @@ class ToolConsumer < ApplicationRecord
   has_many :credentials, through: :consumptions
 
   validates :instance_guid, presence: true, uniqueness: true
-
 end

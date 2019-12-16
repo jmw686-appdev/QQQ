@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: contexts
@@ -14,5 +16,6 @@ class Context < ApplicationRecord
   has_many :launches, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :resources, dependent: :destroy
-
+  has_many :question_templates, :dependent => :destroy
+  has_many :tags, :dependent => :destroy
 end

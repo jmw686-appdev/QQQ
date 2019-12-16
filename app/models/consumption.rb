@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: consumptions
@@ -12,5 +14,4 @@
 class Consumption < ApplicationRecord
   belongs_to :credential
   belongs_to :tool_consumer
-
 end

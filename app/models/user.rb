@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -14,5 +16,4 @@
 class User < ApplicationRecord
   has_many :enrollments, dependent: :destroy
   has_many :launches, dependent: :destroy
-
 end

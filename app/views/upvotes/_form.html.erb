@@ -1,0 +1,55 @@
+<% was_validated = upvote.errors.any? %>
+
+<% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+<%= form_for(upvote, html: form_html_options) do |f| %>
+  <div class="form-group">
+    <% question_id_class = "form-control" %>
+    <% question_id_was_invalid = upvote.errors.include?(:question_id) %>
+
+    <% if was_validated %>
+      <% if question_id_was_invalid %>
+        <% question_id_class << " is-invalid" %>
+      <% else %>
+        <% question_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :question_id %>
+
+    <%= f.number_field :question_id, class: question_id_class, placeholder: "Enter question" %>
+    <% if question_id_was_invalid %>
+      <% upvote.errors.full_messages_for(:question_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% enrollment_id_class = "form-control" %>
+    <% enrollment_id_was_invalid = upvote.errors.include?(:enrollment_id) %>
+
+    <% if was_validated %>
+      <% if enrollment_id_was_invalid %>
+        <% enrollment_id_class << " is-invalid" %>
+      <% else %>
+        <% enrollment_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :enrollment_id %>
+
+    <%= f.number_field :enrollment_id, class: enrollment_id_class, placeholder: "Enter enrollment" %>
+    <% if enrollment_id_was_invalid %>
+      <% upvote.errors.full_messages_for(:enrollment_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

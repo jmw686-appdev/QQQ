@@ -1,0 +1,55 @@
+<% was_validated = question_tag.errors.any? %>
+
+<% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+<%= form_for(question_tag, html: form_html_options) do |f| %>
+  <div class="form-group">
+    <% tag_id_class = "form-control" %>
+    <% tag_id_was_invalid = question_tag.errors.include?(:tag_id) %>
+
+    <% if was_validated %>
+      <% if tag_id_was_invalid %>
+        <% tag_id_class << " is-invalid" %>
+      <% else %>
+        <% tag_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :tag_id %>
+
+    <%= f.number_field :tag_id, class: tag_id_class, placeholder: "Enter tag" %>
+    <% if tag_id_was_invalid %>
+      <% question_tag.errors.full_messages_for(:tag_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% question_id_class = "form-control" %>
+    <% question_id_was_invalid = question_tag.errors.include?(:question_id) %>
+
+    <% if was_validated %>
+      <% if question_id_was_invalid %>
+        <% question_id_class << " is-invalid" %>
+      <% else %>
+        <% question_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :question_id %>
+
+    <%= f.number_field :question_id, class: question_id_class, placeholder: "Enter question" %>
+    <% if question_id_was_invalid %>
+      <% question_tag.errors.full_messages_for(:question_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

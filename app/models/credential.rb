@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: credentials
@@ -23,5 +25,4 @@ class Credential < ApplicationRecord
   def create_tool_provider(params = {})
     IMS::LTI::ToolProvider.new(consumer_key, consumer_secret, params)
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: submissions
@@ -13,5 +15,4 @@
 class Submission < ApplicationRecord
   belongs_to :resource
   belongs_to :enrollment
-
 end

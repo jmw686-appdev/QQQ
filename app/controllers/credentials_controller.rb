@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CredentialsController < ApplicationController
   before_action :set_credential, only: %i[show edit update destroy]
 
@@ -22,7 +24,7 @@ class CredentialsController < ApplicationController
     @credential = Credential.new(Credential_params)
 
     if @credential.save
-      redirect_to @credential, notice: "Credential was successfully created."
+      redirect_to @credential, notice: 'Credential was successfully created.'
     else
       render :new
     end
@@ -31,7 +33,7 @@ class CredentialsController < ApplicationController
   # PATCH/PUT /credentials/1
   def update
     if @credential.update(Credential_params)
-      redirect_to @credential, notice: "Credential was successfully updated."
+      redirect_to @credential, notice: 'Credential was successfully updated.'
     else
       render :edit
     end
@@ -40,17 +42,13 @@ class CredentialsController < ApplicationController
   # DELETE /credentials/1
   def destroy
     @credential.destroy
-    redirect_to credentials_url, notice: "Credential was successfully destroyed."
+    redirect_to credentials_url, notice: 'Credential was successfully destroyed.'
   end
 
-  
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_credential
     @credential = Credential.find(params[:id])
   end
-
-  
-
 end

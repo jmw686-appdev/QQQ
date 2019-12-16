@@ -1,0 +1,44 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    Required Field #<%= required_field.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+      <dt>Input type</dt>
+      <dd><%= required_field.input_type %></dd>
+
+      <dt>Instructions</dt>
+      <dd><%= required_field.instructions %></dd>
+
+      <dt>Question template</dt>
+      <dd><%= required_field.question_template_id %></dd>
+
+      <dt>Options</dt>
+      <dd><%= required_field.options %></dd>
+
+    </dl>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to_show_or_back required_field, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+
+      <div class="col">
+        <%= link_to edit_required_field_url(required_field), class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <%= link_to required_field, method: :delete, data: { confirm: "Do you really want to delete this required_field?" }, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%= time_ago_in_words(required_field.updated_at) %> ago
+  </div>
+</div>

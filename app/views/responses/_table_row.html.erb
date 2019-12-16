@@ -1,0 +1,49 @@
+<tr>
+  <td>
+    <%= response.body %>
+  </td>
+
+  <td>
+    <%= response.enrollment_id %>
+  </td>
+
+  <td>
+    <%= response.question_id %>
+  </td>
+
+  <td>
+    <%= response.anonymous_to_all %>
+  </td>
+
+  <td>
+    <%= response.anonymous_to_students %>
+  </td>
+
+  <td>
+    <%= response.parent_id %>
+  </td>
+
+  <td>
+    <%= response.marked_as_answer %>
+  </td>
+
+  <td>
+    <%= response.marked_good_by_instructor %>
+  </td>
+
+  <td>
+    <div class="btn-group">
+      <%= link_to response, class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-search-plus fa-fw"></i>
+      <% end %>
+
+      <%= link_to edit_response_url(response), class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-edit fa-fw"></i>
+      <% end %>
+
+      <%= link_to response, method: :delete, data: { confirm: "Do you really want to delete this response?" }, class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-trash-alt fa-fw"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

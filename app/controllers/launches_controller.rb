@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LaunchesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
   before_action :set_launch, only: %i[show edit update destroy]
@@ -10,7 +12,7 @@ class LaunchesController < ApplicationController
 
       redirect_to resource_path(launch_service.resource)
     else
-      redirect_to "/landing", notice: "Unauthorized!"
+      redirect_to '/landing', notice: 'Unauthorized!'
     end
   end
 
@@ -19,10 +21,10 @@ class LaunchesController < ApplicationController
       format.xml do
         tool_config = IMS::LTI::ToolConfig.new(
           title: "firstdraft #{Rails.application.class.module_parent.to_s.underscore}",
-          launch_url: launch_url,
+          launch_url: launch_url
         )
 
-        tool_config.description = "This LTI Tool provides some good vibes!"
+        tool_config.description = 'This LTI Tool provides some good vibes!'
 
         render xml: tool_config.to_xml
       end

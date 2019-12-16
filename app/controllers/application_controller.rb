@@ -1,4 +1,7 @@
-class ApplicationController < ActionController::Base  helper_method :current_enrollment
+# frozen_string_literal: true
+
+class ApplicationController < ActionController::Base
+  helper_method :current_enrollment
   def set_current_enrollment(enrollment)
     session[:enrollment_id] = enrollment.id
     @enrollment = enrollment
@@ -9,5 +12,4 @@ class ApplicationController < ActionController::Base  helper_method :current_enr
   end
 
   def landing; end
-
 end

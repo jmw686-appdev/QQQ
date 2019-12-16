@@ -1,0 +1,97 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1 class="display-4">
+      Responses
+
+      <%= link_to new_response_path, class: "btn btn-lg btn-outline-secondary" do %>
+        <i class="fas fa-plus fa-fw"></i>
+      <% end %>
+    </h1>
+  </div>
+</div>
+
+<!-- Table example -->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              Body
+            </th>
+
+            <th>
+              Enrollment
+            </th>
+
+            <th>
+              Question
+            </th>
+
+            <th>
+              Anonymous to all
+            </th>
+
+            <th>
+              Anonymous to students
+            </th>
+
+            <th>
+              Parent
+            </th>
+
+            <th>
+              Marked as answer
+            </th>
+
+            <th>
+              Marked good by instructor
+            </th>
+
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= render collection: @responses, partial: "table_row", as: :response %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Card deck example -->
+
+<% @responses.each_slice(3) do |slice| %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-deck">
+      <%= render collection: slice, partial: "card", as: :response %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<!-- List group example -->
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-8">
+    <div class="card">
+      <h1 class="card-header h4 d-flex align-items-center justify-content-between">
+        Responses
+
+        <%= link_to new_response_path, class: "btn btn-sm btn-outline-secondary" do %>
+          <i class="fas fa-plus fa-fw"></i>
+        <% end %>
+      </h1>
+
+      <div class="list-group list-group-flush">
+        <%= render collection: @responses, partial: "list_item", as: :response %>
+      </div>
+    </div>
+  </div>
+</div>

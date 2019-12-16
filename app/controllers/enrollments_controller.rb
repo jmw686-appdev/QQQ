@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: %i[show edit update destroy]
 
@@ -22,7 +24,7 @@ class EnrollmentsController < ApplicationController
     @enrollment = Enrollment.new(Enrollment_params)
 
     if @enrollment.save
-      redirect_to @enrollment, notice: "Enrollment was successfully created."
+      redirect_to @enrollment, notice: 'Enrollment was successfully created.'
     else
       render :new
     end
@@ -31,7 +33,7 @@ class EnrollmentsController < ApplicationController
   # PATCH/PUT /enrollments/1
   def update
     if @enrollment.update(Enrollment_params)
-      redirect_to @enrollment, notice: "Enrollment was successfully updated."
+      redirect_to @enrollment, notice: 'Enrollment was successfully updated.'
     else
       render :edit
     end
@@ -40,17 +42,13 @@ class EnrollmentsController < ApplicationController
   # DELETE /enrollments/1
   def destroy
     @enrollment.destroy
-    redirect_to enrollments_url, notice: "Enrollment was successfully destroyed."
+    redirect_to enrollments_url, notice: 'Enrollment was successfully destroyed.'
   end
 
-  
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_enrollment
     @enrollment = Enrollment.find(params[:id])
   end
-
-  
-
 end

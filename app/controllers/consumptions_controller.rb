@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConsumptionsController < ApplicationController
   before_action :set_consumption, only: %i[show edit update destroy]
 
@@ -22,7 +24,7 @@ class ConsumptionsController < ApplicationController
     @consumption = Consumption.new(Consumption_params)
 
     if @consumption.save
-      redirect_to @consumption, notice: "Consumption was successfully created."
+      redirect_to @consumption, notice: 'Consumption was successfully created.'
     else
       render :new
     end
@@ -31,7 +33,7 @@ class ConsumptionsController < ApplicationController
   # PATCH/PUT /consumptions/1
   def update
     if @consumption.update(Consumption_params)
-      redirect_to @consumption, notice: "Consumption was successfully updated."
+      redirect_to @consumption, notice: 'Consumption was successfully updated.'
     else
       render :edit
     end
@@ -40,17 +42,13 @@ class ConsumptionsController < ApplicationController
   # DELETE /consumptions/1
   def destroy
     @consumption.destroy
-    redirect_to consumptions_url, notice: "Consumption was successfully destroyed."
+    redirect_to consumptions_url, notice: 'Consumption was successfully destroyed.'
   end
 
-  
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_consumption
     @consumption = Consumption.find(params[:id])
   end
-
-  
-
 end

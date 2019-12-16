@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class LaunchService
-  require "oauth/request_proxy/action_controller_request"
+  require 'oauth/request_proxy/action_controller_request'
 
   attr_accessor :context
   attr_accessor :credential
@@ -21,9 +23,7 @@ class LaunchService
     self.launch = Launch.create(payload: payload)
     find_credential
 
-    unless credential.enabled?
-      raise "Credential disabled"
-    end
+    raise 'Credential disabled' unless credential.enabled?
 
     tool_provider = credential.create_tool_provider(payload)
     tool_provider.valid_request?(request)
@@ -38,18 +38,16 @@ class LaunchService
 
   def find_credential
     self.credential = Credential.find_by(
-      consumer_key: payload.fetch(:oauth_consumer_key),
+      consumer_key: payload.fetch(:oauth_consumer_key)
     )
-    if credential.blank?
-      raise "Unknown LTI Key"
-    end
+    raise 'Unknown LTI Key' if credential.blank?
 
     credential
   end
 
   def find_or_create_tool_consumer
     self.tool_consumer = ToolConsumer.find_or_create_by(
-      instance_guid: payload[:tool_consumer_instance_guid],
+      instance_guid: payload[:tool_consumer_instance_guid]
     ) do |tc|
       tc.instance_url = payload[:tool_consumer_instance_url]
       tc.instance_description = payload[:tool_consumer_instance_description]
@@ -75,7 +73,7 @@ class LaunchService
 
   def find_or_create_context
     self.context = Context.find_or_create_by(
-      id_from_tc: payload[:context_id],
+      id_from_tc: payload[:context_id]
     ) do |context|
       context.title = payload[:context_title]
     end
@@ -84,7 +82,7 @@ class LaunchService
 
   def find_or_create_resource
     self.resource = Resource.find_or_create_by(
-      id_from_tc: payload[:resource_link_id],
+      id_from_tc: payload[:resource_link_id]
     ) do |resource|
       resource.title = payload[:resource_link_title]
       resource.context = @context
@@ -95,7 +93,7 @@ class LaunchService
   def find_or_create_enrollment
     self.enrollment = Enrollment.find_or_create_by(
       context: context,
-      user: user,
+      user: user
     ) do |enrollment|
       enrollment.roles = payload[:roles]
     end
@@ -104,7 +102,7 @@ class LaunchService
   def find_or_create_submission
     self.submission = Submission.find_or_create_by(
       resource: resource,
-      enrollment: enrollment,
+      enrollment: enrollment
     )
   end
 
@@ -123,7 +121,7 @@ class LaunchService
       resource: resource,
       enrollment: enrollment,
       user: user,
-      tool_consumer: tool_consumer,
+      tool_consumer: tool_consumer
     )
   end
 end

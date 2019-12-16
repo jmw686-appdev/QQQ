@@ -1,0 +1,103 @@
+<% was_validated = required_field.errors.any? %>
+
+<% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+<%= form_for(required_field, html: form_html_options) do |f| %>
+  <div class="form-group">
+    <% input_type_class = "form-control" %>
+    <% input_type_was_invalid = required_field.errors.include?(:input_type) %>
+
+    <% if was_validated %>
+      <% if input_type_was_invalid %>
+        <% input_type_class << " is-invalid" %>
+      <% else %>
+        <% input_type_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :input_type %>
+
+    <%= f.text_field :input_type, class: input_type_class, placeholder: "Enter input type" %>
+    <% if input_type_was_invalid %>
+      <% required_field.errors.full_messages_for(:input_type).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% instructions_class = "form-control" %>
+    <% instructions_was_invalid = required_field.errors.include?(:instructions) %>
+
+    <% if was_validated %>
+      <% if instructions_was_invalid %>
+        <% instructions_class << " is-invalid" %>
+      <% else %>
+        <% instructions_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :instructions %>
+
+    <%= f.text_field :instructions, class: instructions_class, placeholder: "Enter instructions" %>
+    <% if instructions_was_invalid %>
+      <% required_field.errors.full_messages_for(:instructions).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% question_template_id_class = "form-control" %>
+    <% question_template_id_was_invalid = required_field.errors.include?(:question_template_id) %>
+
+    <% if was_validated %>
+      <% if question_template_id_was_invalid %>
+        <% question_template_id_class << " is-invalid" %>
+      <% else %>
+        <% question_template_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :question_template_id %>
+
+    <%= f.number_field :question_template_id, class: question_template_id_class, placeholder: "Enter question template" %>
+    <% if question_template_id_was_invalid %>
+      <% required_field.errors.full_messages_for(:question_template_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% options_class = "form-control" %>
+    <% options_was_invalid = required_field.errors.include?(:options) %>
+
+    <% if was_validated %>
+      <% if options_was_invalid %>
+        <% options_class << " is-invalid" %>
+      <% else %>
+        <% options_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :options %>
+
+    <%= f.text_area :options, class: options_class, placeholder: "Enter options" %>
+    <% if options_was_invalid %>
+      <% required_field.errors.full_messages_for(:options).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

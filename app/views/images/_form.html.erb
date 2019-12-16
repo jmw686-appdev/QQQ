@@ -1,0 +1,55 @@
+<% was_validated = image.errors.any? %>
+
+<% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+<%= form_for(image, html: form_html_options) do |f| %>
+  <div class="form-group">
+    <% source_class = "form-control" %>
+    <% source_was_invalid = image.errors.include?(:source) %>
+
+    <% if was_validated %>
+      <% if source_was_invalid %>
+        <% source_class << " is-invalid" %>
+      <% else %>
+        <% source_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :source %>
+
+    <%= f.text_field :source, class: source_class, placeholder: "Enter source" %>
+    <% if source_was_invalid %>
+      <% image.errors.full_messages_for(:source).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% enrollment_id_class = "form-control" %>
+    <% enrollment_id_was_invalid = image.errors.include?(:enrollment_id) %>
+
+    <% if was_validated %>
+      <% if enrollment_id_was_invalid %>
+        <% enrollment_id_class << " is-invalid" %>
+      <% else %>
+        <% enrollment_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :enrollment_id %>
+
+    <%= f.number_field :enrollment_id, class: enrollment_id_class, placeholder: "Enter enrollment" %>
+    <% if enrollment_id_was_invalid %>
+      <% image.errors.full_messages_for(:enrollment_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

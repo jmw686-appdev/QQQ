@@ -1,0 +1,25 @@
+<tr>
+  <td>
+    <%= tag.name %>
+  </td>
+
+  <td>
+    <%= tag.context_id %>
+  </td>
+
+  <td>
+    <div class="btn-group">
+      <%= link_to tag, class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-search-plus fa-fw"></i>
+      <% end %>
+
+      <%= link_to edit_tag_url(tag), class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-edit fa-fw"></i>
+      <% end %>
+
+      <%= link_to tag, method: :delete, data: { confirm: "Do you really want to delete this tag?" }, class: "btn btn-sm btn-outline-secondary" do %>
+        <i class="fas fa-trash-alt fa-fw"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ToolConsumersController < ApplicationController
   before_action :set_tool_consumer, only: %i[show edit update destroy]
 
@@ -22,7 +24,7 @@ class ToolConsumersController < ApplicationController
     @tool_consumer = ToolConsumer.new(ToolConsumer_params)
 
     if @tool_consumer.save
-      redirect_to @tool_consumer, notice: "ToolConsumer was successfully created."
+      redirect_to @tool_consumer, notice: 'ToolConsumer was successfully created.'
     else
       render :new
     end
@@ -31,7 +33,7 @@ class ToolConsumersController < ApplicationController
   # PATCH/PUT /tool_consumers/1
   def update
     if @tool_consumer.update(ToolConsumer_params)
-      redirect_to @tool_consumer, notice: "Tool_consumer was successfully updated."
+      redirect_to @tool_consumer, notice: 'Tool_consumer was successfully updated.'
     else
       render :edit
     end
@@ -40,17 +42,13 @@ class ToolConsumersController < ApplicationController
   # DELETE /tool_consumers/1
   def destroy
     @tool_consumer.destroy
-    redirect_to tool_consumers_url, notice: "ToolConsumer was successfully destroyed."
+    redirect_to tool_consumers_url, notice: 'ToolConsumer was successfully destroyed.'
   end
 
-  
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_tool_consumer
     @tool_consumer = ToolConsumer.find(params[:id])
   end
-
-  
-
 end

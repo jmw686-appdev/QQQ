@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourcesController < ApplicationController
   before_action :set_resource, only: %i[show edit update destroy]
 
@@ -7,7 +9,10 @@ class ResourcesController < ApplicationController
   end
 
   # GET /resources/1
-  def show; end
+  def show
+    @enrollment = current_enrollment
+    @question = Question.new
+  end
 
   # GET /resources/new
   def new
@@ -22,7 +27,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(Resource_params)
 
     if @resource.save
-      redirect_to @resource, notice: "Resource was successfully created."
+      redirect_to @resource, notice: 'Resource was successfully created.'
     else
       render :new
     end
@@ -31,7 +36,7 @@ class ResourcesController < ApplicationController
   # PATCH/PUT /resources/1
   def update
     if @resource.update(Resource_params)
-      redirect_to @resource, notice: "Resource was successfully updated."
+      redirect_to @resource, notice: 'Resource was successfully updated.'
     else
       render :edit
     end
@@ -40,29 +45,29 @@ class ResourcesController < ApplicationController
   # DELETE /resources/1
   def destroy
     @resource.destroy
-    redirect_to resources_url, notice: "Resource was successfully destroyed."
+    redirect_to resources_url, notice: 'Resource was successfully destroyed.'
   end
 
-    def teacher_backdoor
+  def teacher_backdoor
     @user = User.find_by(
       # from dev:prime data
-      id_from_tc: "bd815e718b9d924bdd6ceb708bc2c6eb4ab0754b",
+      id_from_tc: 'bd815e718b9d924bdd6ceb708bc2c6eb4ab0754b'
     )
     set_back_door_attributes
 
     redirect_to resource_url(@resource)
-  end
+end
 
   def student_backdoor
     @user = User.find_by(
       # from dev:prime data
-      id_from_tc: "03bdb94e0a8fc857ef71280eaf0919199a841bc0",
+      id_from_tc: '03bdb94e0a8fc857ef71280eaf0919199a841bc0'
     )
     set_back_door_attributes
 
     redirect_to resource_url(@resource)
   end
-  
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -70,24 +75,23 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
   end
 
-  
   def set_back_door_attributes
     reset_session
     # from seed data
     @context = Context.find_by(
       # from seed data
-      id_from_tc: "4a91e348a7026222b98bd2af87be0aeee085eb0f",
+      id_from_tc: '4a91e348a7026222b98bd2af87be0aeee085eb0f'
     )
     # from seed data
     @resource = Resource.find_by(
       # from seed data
-      id_from_tc: "fa070692257fc1b67ce7461e18cecd418a5286d5",
+      id_from_tc: 'fa070692257fc1b67ce7461e18cecd418a5286d5'
     )
     @enrollment = Enrollment.find_by(context: @context, user: @user)
 
     @submission = Submission.find_by(
       enrollment: @enrollment,
-      resource: @resource,
+      resource: @resource
     )
 
     session[:enrollment_id] = @enrollment.id
@@ -95,6 +99,4 @@ class ResourcesController < ApplicationController
     session[:resource_id] = @resource.id
     session[:submission_id] = @submission.try(:id)
   end
-  
-
 end

@@ -1,0 +1,79 @@
+<% was_validated = question_template.errors.any? %>
+
+<% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+<%= form_for(question_template, html: form_html_options) do |f| %>
+  <div class="form-group">
+    <% context_id_class = "form-control" %>
+    <% context_id_was_invalid = question_template.errors.include?(:context_id) %>
+
+    <% if was_validated %>
+      <% if context_id_was_invalid %>
+        <% context_id_class << " is-invalid" %>
+      <% else %>
+        <% context_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :context_id %>
+
+    <%= f.number_field :context_id, class: context_id_class, placeholder: "Enter context" %>
+    <% if context_id_was_invalid %>
+      <% question_template.errors.full_messages_for(:context_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% name_class = "form-control" %>
+    <% name_was_invalid = question_template.errors.include?(:name) %>
+
+    <% if was_validated %>
+      <% if name_was_invalid %>
+        <% name_class << " is-invalid" %>
+      <% else %>
+        <% name_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :name %>
+
+    <%= f.text_field :name, class: name_class, placeholder: "Enter name" %>
+    <% if name_was_invalid %>
+      <% question_template.errors.full_messages_for(:name).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <% points_awarded_class = "form-control" %>
+    <% points_awarded_was_invalid = question_template.errors.include?(:points_awarded) %>
+
+    <% if was_validated %>
+      <% if points_awarded_was_invalid %>
+        <% points_awarded_class << " is-invalid" %>
+      <% else %>
+        <% points_awarded_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :points_awarded %>
+
+    <%= f.number_field :points_awarded, class: points_awarded_class, placeholder: "Enter points awarded" %>
+    <% if points_awarded_was_invalid %>
+      <% question_template.errors.full_messages_for(:points_awarded).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

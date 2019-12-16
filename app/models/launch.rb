@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: launches
@@ -21,5 +23,4 @@ class Launch < ApplicationRecord
   belongs_to :user
 
   has_one :credential, through: :tool_consumer, source: :credentials
-
 end

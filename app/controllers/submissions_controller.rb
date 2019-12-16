@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: %i[show edit update destroy]
 
@@ -22,7 +24,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(Submission_params)
 
     if @submission.save
-      redirect_to @submission, notice: "Submission was successfully created."
+      redirect_to @submission, notice: 'Submission was successfully created.'
     else
       render :new
     end
@@ -31,7 +33,7 @@ class SubmissionsController < ApplicationController
   # PATCH/PUT /submissions/1
   def update
     if @submission.update(Submission_params)
-      redirect_to @submission, notice: "Submission was successfully updated."
+      redirect_to @submission, notice: 'Submission was successfully updated.'
     else
       render :edit
     end
@@ -40,17 +42,13 @@ class SubmissionsController < ApplicationController
   # DELETE /submissions/1
   def destroy
     @submission.destroy
-    redirect_to submissions_url, notice: "Submission was successfully destroyed."
+    redirect_to submissions_url, notice: 'Submission was successfully destroyed.'
   end
 
-  
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_submission
     @submission = Submission.find(params[:id])
   end
-
-  
-
 end
