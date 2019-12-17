@@ -15,6 +15,13 @@
     <% end %>
   <% end %>
   <p>
+    <% current_enrollment.context.required_fields.each do |field| %>
+    <div>
+      <input type="<%= field.input_type %>" class="form-controler">
+    </div>
+    <% end %>
+  </p>
+  <p>
     <%= @question.body%>
     <div>
       posted by
