@@ -1,5 +1,15 @@
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
     <%= render object: @context, partial: "card", as: :context %>
+    <%= render collection: @context.resources, partial: "resources/card", as: :resource %>
+    <%= render collection: @context.question_templates, partial: "question_templates/list_item", as: :question_template %>
+    <div>
+      <%= form_for(QuestionTemplate.new) do |f| %>
+        <%= f.hidden_field :context_id, value: @context.id %>
+        <%= f.text_field :name, placeholder: "Enter name" %>
+        <%= f.number_field :points_awarded, placeholder: "Enter points awarded" %>
+        <%= f.button class: "btn btn-outline-secondary btn-block" %>
+      <% end %>
+    </div>
   </div>
 </div>

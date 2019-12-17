@@ -10,6 +10,12 @@
           <%= f.label :title %>
           <%= f.text_field :title, class: "form-control", placeholder: "Enter title" %>
         </div>
+        <% current_enrollment.context.required_fields.each do |field| %>
+        <div class="form-group">
+          <label><%= field.instructions%></label>
+          <input type="<%= field.input_type %>" class="form-controler">
+        </div>
+        <% end %>
         <div class="form-group">
           <%= f.label :body %>
           <%= f.text_area :body, class: "form-control", rows: 4 %>
@@ -33,7 +39,7 @@
         </div>
 
         <%= f.hidden_field :enrollment_id, value: @enrollment.id %>
-        <%= f.submit "Send", class: "btn btn-dark btn-block" %>
+        <%= f.submit "Ask", class: "btn btn-dark btn-block" %>
       <% end %>
     </div>
   </div>

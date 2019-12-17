@@ -1,5 +1,7 @@
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
     <%= render object: @question_template, partial: "card", as: :question_template %>
+    <%= render object: RequiredField.new, partial: "required_fields/form", as: :required_field, locals: {question_template: @question_template} %>
+
   </div>
 </div>

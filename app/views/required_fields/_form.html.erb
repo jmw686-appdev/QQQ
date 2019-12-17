@@ -16,8 +16,10 @@
     <% end %>
 
     <%= f.label :input_type %>
+    <% types = ["field", "dropdown", "text", "integer", "decimal", "date", "time", "datetime" ] %>
+    <%= f.select :input_type, types %>
 
-    <%= f.text_field :input_type, class: input_type_class, placeholder: "Enter input type" %>
+    <%#= f.text_field :input_type, class: input_type_class, placeholder: "Enter input type" %>
     <% if input_type_was_invalid %>
       <% required_field.errors.full_messages_for(:input_type).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -65,7 +67,7 @@
 
     <%= f.label :question_template_id %>
 
-    <%= f.number_field :question_template_id, class: question_template_id_class, placeholder: "Enter question template" %>
+    <%= f.number_field :question_template_id, class: question_template_id_class, value: @question_template.id %>
     <% if question_template_id_was_invalid %>
       <% required_field.errors.full_messages_for(:question_template_id).each do |message| %>
         <div class="invalid-feedback d-flex">

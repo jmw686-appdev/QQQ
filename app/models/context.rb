@@ -16,6 +16,8 @@ class Context < ApplicationRecord
   has_many :launches, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :resources, dependent: :destroy
-  has_many :question_templates, :dependent => :destroy
+  has_many :question_templates, :dependent => :destroy  
   has_many :tags, :dependent => :destroy
+  
+  has_many :required_fields, :through => :question_templates, :source => :required_fields
 end

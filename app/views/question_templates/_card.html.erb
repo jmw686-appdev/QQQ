@@ -34,6 +34,7 @@
       </div>
     </div>
   </div>
+  <%= render collection: @question_template.required_fields, partial: "required_fields/list_item", as: :required_field %>
 
   <div class="card-footer text-muted">
     Last updated <%= time_ago_in_words(question_template.updated_at) %> ago
