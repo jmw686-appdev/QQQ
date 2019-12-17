@@ -168,7 +168,8 @@ ActiveRecord::Schema.define(version: 2019_12_16_144513) do
   end
 
   create_table "upvotes", force: :cascade do |t|
-    t.integer "question_id"
+    t.integer "post_id"
+    t.string "post_type"
     t.integer "enrollment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -24,7 +24,7 @@ class UpvotesController < ApplicationController
     @upvote = Upvote.new(upvote_params)
 
     if @upvote.save
-      redirect_to @upvote, notice: 'Upvote was successfully created.'
+      redirect_to @upvote.post, notice: 'Upvote was successfully created.'
     else
       render :new
     end
@@ -42,7 +42,7 @@ class UpvotesController < ApplicationController
   # DELETE /upvotes/1
   def destroy
     @upvote.destroy
-    redirect_to upvotes_url, notice: 'Upvote was successfully destroyed.'
+    redirect_to @upvote.post, notice: 'Upvote was successfully destroyed.'
   end
 
   private
@@ -53,6 +53,6 @@ class UpvotesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def upvote_params
-      params.require(:upvote).permit(:question_id, :enrollment_id)
+      params.require(:upvote).permit(:post_id, :post_type, :enrollment_id)
     end
 end

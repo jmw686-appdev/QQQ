@@ -1,5 +1,12 @@
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
     <%= render object: @question, partial: "card", as: :question %>
+    <div class="list-group d-flex align-items-left justify-content-between">
+      <%= render collection: @question.responses, partial: "responses/card", as: :response %>
+    </div>
+    <div>
+      <h3>Respond</h3>
+      <%= render "responses/form", response: Response.new(question_id: @question.id, enrollment_id: current_enrollment.id) %>
+    </div>
   </div>
 </div>

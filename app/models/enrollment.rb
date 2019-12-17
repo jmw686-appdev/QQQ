@@ -25,5 +25,15 @@ class Enrollment < ApplicationRecord
 
   has_one :resource, :through => :user, :source => :resources
 
-  
+  def teacher?
+    roles.downcase.include?("teachingassistant") || roles.downcase.include?("instructor")
+  end
+
+  def has_upvoted_question?(question)
+    question.upvotes.pluck(:enrollment_id).include?(self.id)
+  end
+
+  def has_upvoted_response?(response)
+    response.upvotes.pluck(:enrollment_id).include?(self.id)
+  end
 end

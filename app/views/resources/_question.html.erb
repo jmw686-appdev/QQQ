@@ -1,60 +1,23 @@
-<div class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
-<div class="card mb-3">
 
-  <div class="card-body">
-    <dl class="mb-1">
-      <dt>Title</dt>
-      <dd><%= question.title %></dd>
-      <hr>
-      <dd><%= question.body %></dd>
-      <% if question.anonymous_to_all %>
+  <% if current_enrollment.has_upvoted_question?(question) %>
+    <a href="/upvotes/<%= Upvote.find_by(enrollment: current_enrollment, post: question).id %>" data-method="delete"><i class="fas fa-sort-up"></i><%= question.upvotes.count%> </a>
+    <%#= link_to "<span><i class=\"fas fa-sort-up\">#{question.upvotes.count}</span>".html_safe, Upvote.find_by(enrollment: current_enrollment, post: question), method: :delete %>
 
-        <dd>Anonymous</dd>
-      <% elsif question.anonymous_to_students %>
-        (check current_enrollment role)
-        <dd><%= question.user.first_name + "(Anonymous to students)"  %> </dd>
-
-      <% else %>
-        <dd><%= question.user.first_name %></dd>
-
-      <% end %>
-
-      <dt>Assignment tag</dt>
-      <dd><%= question.assignment_tag %></dd>
-
-      <dt>Anonymous to all</dt>
-      <dd><%= question.anonymous_to_all %></dd>
-
-      <dt>Anonymous to students</dt>
-      <dd><%= question.anonymous_to_students %></dd>
-
-      <dt>Marked good by instructor</dt>
-      <dd><%= question.marked_good_by_instructor %></dd>
-
-    </dl>
-
-    <div class="row">
-      <div class="col">
-        <%= link_to_show_or_back question, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
-      </div>
-
-      <div class="col">
-        <%= link_to edit_question_url(question), class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-edit"></i>
-        <% end %>
-      </div>
-
-      <div class="col">
-        <%= link_to question, method: :delete, data: { confirm: "Do you really want to delete this question?" }, class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-trash-alt"></i>
-        <% end %>
-      </div>
-    </div>
+  <% else %>
+    <%= form_for(Upvote.new) do |f| %>
+      <%= f.hidden_field :post_id, value: question.id %>
+      <%= f.hidden_field :post_type, value: "Question" %>
+      <%= f.hidden_field :enrollment_id, value: current_enrollment.id %>
+      <button>
+        <i class="fas fa-sort-up"></i><%= question.upvotes.count %>
+      </button>
+    <% end %>
+  <% end %>
+<%= link_to question, class:"list-group-item list-group-item-action" do %>
+  <span class="h6 mr-3"><%= question.title %></span>
+  <div>
+    <%= truncate question.body, length: 100 %>
   </div>
-
-  <div class="card-footer text-muted">
-    Last updated <%= time_ago_in_words(question.updated_at) %> ago
-  </div>
-</div>
-
-</div>
+  <hr>
+ Last updated <%= time_ago_in_words(question.updated_at) %> ago
+<% end %>

@@ -15,8 +15,6 @@
       <% end %>
     <% end %>
 
-    <%= f.label :body %>
-
     <%= f.text_area :body, class: body_class, placeholder: "Enter body" %>
     <% if body_was_invalid %>
       <% response.errors.full_messages_for(:body).each do |message| %>
@@ -27,53 +25,8 @@
     <% end %>
   </div>
 
-  <div class="form-group">
-    <% enrollment_id_class = "form-control" %>
-    <% enrollment_id_was_invalid = response.errors.include?(:enrollment_id) %>
-
-    <% if was_validated %>
-      <% if enrollment_id_was_invalid %>
-        <% enrollment_id_class << " is-invalid" %>
-      <% else %>
-        <% enrollment_id_class << " is-valid" %>
-      <% end %>
-    <% end %>
-
-    <%= f.label :enrollment_id %>
-
-    <%= f.number_field :enrollment_id, class: enrollment_id_class, placeholder: "Enter enrollment" %>
-    <% if enrollment_id_was_invalid %>
-      <% response.errors.full_messages_for(:enrollment_id).each do |message| %>
-        <div class="invalid-feedback d-flex">
-          <%= message %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <% question_id_class = "form-control" %>
-    <% question_id_was_invalid = response.errors.include?(:question_id) %>
-
-    <% if was_validated %>
-      <% if question_id_was_invalid %>
-        <% question_id_class << " is-invalid" %>
-      <% else %>
-        <% question_id_class << " is-valid" %>
-      <% end %>
-    <% end %>
-
-    <%= f.label :question_id %>
-
-    <%= f.number_field :question_id, class: question_id_class, placeholder: "Enter question" %>
-    <% if question_id_was_invalid %>
-      <% response.errors.full_messages_for(:question_id).each do |message| %>
-        <div class="invalid-feedback d-flex">
-          <%= message %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+  <%= f.hidden_field :enrollment_id, :value => response.enrollment_id %>
+  <%= f.hidden_field :question_id, :value => response.question_id %>
 
   <div class="form-check">
     <% anonymous_to_all_class = "form-check-input" %>
@@ -116,78 +69,6 @@
     <% end %>
     <% if anonymous_to_students_was_invalid %>
       <% response.errors.full_messages_for(:anonymous_to_students).each do |message| %>
-        <div class="invalid-feedback d-flex">
-          <%= message %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <% parent_id_class = "form-control" %>
-    <% parent_id_was_invalid = response.errors.include?(:parent_id) %>
-
-    <% if was_validated %>
-      <% if parent_id_was_invalid %>
-        <% parent_id_class << " is-invalid" %>
-      <% else %>
-        <% parent_id_class << " is-valid" %>
-      <% end %>
-    <% end %>
-
-    <%= f.label :parent_id %>
-
-    <%= f.number_field :parent_id, class: parent_id_class, placeholder: "Enter parent" %>
-    <% if parent_id_was_invalid %>
-      <% response.errors.full_messages_for(:parent_id).each do |message| %>
-        <div class="invalid-feedback d-flex">
-          <%= message %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="form-check">
-    <% marked_as_answer_class = "form-check-input" %>
-    <% marked_as_answer_was_invalid = response.errors.include?(:marked_as_answer) %>
-
-    <% if was_validated %>
-      <% if marked_as_answer_was_invalid %>
-        <% marked_as_answer_class << " is-invalid" %>
-      <% else %>
-        <% marked_as_answer_class << " is-valid" %>
-      <% end %>
-    <% end %>
-
-    <%= f.label :marked_as_answer, class: "form-check-label" do %>
-      <%= f.check_box :marked_as_answer, class: marked_as_answer_class %> Marked as answer
-    <% end %>
-    <% if marked_as_answer_was_invalid %>
-      <% response.errors.full_messages_for(:marked_as_answer).each do |message| %>
-        <div class="invalid-feedback d-flex">
-          <%= message %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="form-check">
-    <% marked_good_by_instructor_class = "form-check-input" %>
-    <% marked_good_by_instructor_was_invalid = response.errors.include?(:marked_good_by_instructor) %>
-
-    <% if was_validated %>
-      <% if marked_good_by_instructor_was_invalid %>
-        <% marked_good_by_instructor_class << " is-invalid" %>
-      <% else %>
-        <% marked_good_by_instructor_class << " is-valid" %>
-      <% end %>
-    <% end %>
-
-    <%= f.label :marked_good_by_instructor, class: "form-check-label" do %>
-      <%= f.check_box :marked_good_by_instructor, class: marked_good_by_instructor_class %> Marked good by instructor
-    <% end %>
-    <% if marked_good_by_instructor_was_invalid %>
-      <% response.errors.full_messages_for(:marked_good_by_instructor).each do |message| %>
         <div class="invalid-feedback d-flex">
           <%= message %>
         </div>

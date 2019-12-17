@@ -18,5 +18,10 @@
 class Response < ApplicationRecord
   belongs_to :enrollment
   belongs_to :question
+  has_many :upvotes, as: :post, :dependent => :destroy
+
   has_many :attached_images, :dependent => :destroy
+
+  has_one :user, :through => :enrollment, :source => :user
+
 end

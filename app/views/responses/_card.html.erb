@@ -1,56 +1,33 @@
-<div class="card mb-3">
-  <h2 class="card-header h4">
-    Response #<%= response.id %>
-  </h2>
-
-  <div class="card-body">
-    <dl class="mb-1">
-      <dt>Body</dt>
-      <dd><%= response.body %></dd>
-
-      <dt>Enrollment</dt>
-      <dd><%= response.enrollment_id %></dd>
-
-      <dt>Question</dt>
-      <dd><%= response.question_id %></dd>
-
-      <dt>Anonymous to all</dt>
-      <dd><%= response.anonymous_to_all %></dd>
-
-      <dt>Anonymous to students</dt>
-      <dd><%= response.anonymous_to_students %></dd>
-
-      <dt>Parent</dt>
-      <dd><%= response.parent_id %></dd>
-
-      <dt>Marked as answer</dt>
-      <dd><%= response.marked_as_answer %></dd>
-
-      <dt>Marked good by instructor</dt>
-      <dd><%= response.marked_good_by_instructor %></dd>
-
-    </dl>
-
-    <div class="row">
-      <div class="col">
-        <%= link_to_show_or_back response, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
-      </div>
-
-      <div class="col">
-        <%= link_to edit_response_url(response), class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-edit"></i>
-        <% end %>
-      </div>
-
-      <div class="col">
-        <%= link_to response, method: :delete, data: { confirm: "Do you really want to delete this response?" }, class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-trash-alt"></i>
-        <% end %>
-      </div>
+<div>
+  <h6>
+    <% if response.anonymous_to_all %>
+      Anonymous
+    <% elsif response.anonymous_to_students %>
+      <%= current_enrollment.teacher? ? response.user.first_name + " (Anonymous to students)" : "Anonymous" %>
+    <% else %>
+      <%= response.user.first_name %>
+    <% end %>  
+  </h6>
+  <p>
+    <%= response.body%>
+    <div>
+     Last updated <%= time_ago_in_words response.updated_at %> ago
     </div>
-  </div>
+  </p>
+    <% if current_enrollment.has_upvoted_response?(response) %>
+    <a href="/upvotes/<%= Upvote.find_by(enrollment: current_enrollment, post: response).id %>" data-method="delete"><i class="fas fa-sort-up"></i><%= response.upvotes.count%> </a>
+    <%#= link_to "<span><i class=\"fas fa-sort-up\">#{response.upvotes.count}</span>".html_safe, Upvote.find_by(enrollment: current_enrollment, post: response), method: :delete %>
 
-  <div class="card-footer text-muted">
-    Last updated <%= time_ago_in_words(response.updated_at) %> ago
-  </div>
+  <% else %>
+    <%= form_for(Upvote.new) do |f| %>
+      <%= f.hidden_field :post_id, value: response.id %>
+      <%= f.hidden_field :post_type, value: "Response" %>
+      <%= f.hidden_field :enrollment_id, value: current_enrollment.id %>
+      <button>
+        <i class="fas fa-sort-up"></i><%= response.upvotes.count %>
+      </button>
+    <% end %>
+  <% end %>
+  <hr>
 </div>
+

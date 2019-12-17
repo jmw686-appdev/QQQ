@@ -16,11 +16,12 @@
 
 class Question < ApplicationRecord
   belongs_to :enrollment
-  has_many :upvotes, :dependent => :destroy
+  # has_many :upvotes, :dependent => :destroy
+  has_many :upvotes, as: :post, :dependent => :destroy
   has_many :responses, :dependent => :destroy
   has_many :question_tags, :dependent => :destroy
   has_many :attached_images, :dependent => :destroy
 
   has_one :user, :through => :enrollment, :source => :user
-
+  has_many :tags, :through => :question_tags, :source => :tag
 end
